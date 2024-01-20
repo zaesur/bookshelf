@@ -37,8 +37,8 @@ const Shelf: FunctionComponent<ShelfProps> = ({ length, thickness, depth, ...mes
             if (i < third) {
                 uv.setXY(
                     i,
-                    x * thickness,
-                    y * depth
+                    x * depth,
+                    y * thickness
                 )
             }
             // Top and bottom
