@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import Experience from "./Experience";
 import styles from "./App.module.css";
 import BookShelf from "./Bookshelf";
-import { useControls } from "leva"
+import { button, useControls } from "leva"
 
 const App: FunctionComponent = () => {
   const {
@@ -11,7 +11,6 @@ const App: FunctionComponent = () => {
     depth,
     shelves,
     thickness,
-    wireframe,
   } = useControls({
     width: {
       value: 1.5,
@@ -42,15 +41,13 @@ const App: FunctionComponent = () => {
       step: 0.005,
       min: 0.01,
       max: 0.05,
-    },
-    wireframe: false,
+    }
   })
 
   return (
     <div className={styles.experience}>
       <Experience>
         <BookShelf
-          wireframe={wireframe}
           width={width}
           height={height}
           depth={depth}

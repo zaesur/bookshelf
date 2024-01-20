@@ -1,4 +1,4 @@
-import { Center, OrbitControls } from "@react-three/drei";
+import { Stage, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { FunctionComponent, ReactNode } from "react";
 
@@ -10,9 +10,9 @@ const Experience: FunctionComponent<ExperienceProps> = ({ children }) => {
   return (
     <Canvas>
       <OrbitControls />
-      <Center>
+      <Stage>
         {children}
-      </Center>
+      </Stage>
     </Canvas>
   );
 };
