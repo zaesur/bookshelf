@@ -3,7 +3,6 @@ import { useControls } from "leva";
 import { MeshProps } from "@react-three/fiber";
 import { FunctionComponent, useMemo } from "react";
 import { BoxGeometry, RepeatWrapping, Texture } from "three";
-import { MeshReflectorMaterial } from "@react-three/drei";
 
 interface ShelfProps extends MeshProps {
     length: number;
