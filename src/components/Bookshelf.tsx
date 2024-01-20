@@ -8,14 +8,16 @@ interface BookShelfProps {
     depth: number;
     shelves: number;
     thickness: number;
+    wireframe?: boolean;
 }
 
 const BookShelf: FunctionComponent<BookShelfProps> = ({
+    depth,
     width,
     height,
-    depth,
     shelves,
-    thickness
+    thickness,
+    wireframe
 }) => {
     const shelfWidth = width - 2 * thickness
 
@@ -23,6 +25,7 @@ const BookShelf: FunctionComponent<BookShelfProps> = ({
         {/* Boards */}
         {Array.from(Array(shelves + 2)).map((_, i) =>
             <Shelf
+                wireframe={wireframe}
                 key={i}
                 depth={depth}
                 length={shelfWidth}
@@ -33,6 +36,7 @@ const BookShelf: FunctionComponent<BookShelfProps> = ({
 
         {/* Left side panel */}
         <Shelf
+            wireframe={wireframe}
             position={[-(width - thickness) / 2, (height - thickness) / 2, 0]}
             rotation={[0, 0, Math.PI / 2]}
             depth={depth}
@@ -42,6 +46,7 @@ const BookShelf: FunctionComponent<BookShelfProps> = ({
 
         {/* Right side panel */}
         <Shelf
+            wireframe={wireframe}
             position={[(width - thickness) / 2, (height - thickness) / 2, 0]}
             rotation={[0, 0, Math.PI / 2]}
             depth={depth}

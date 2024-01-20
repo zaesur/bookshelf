@@ -5,12 +5,13 @@ interface ShelfProps extends MeshProps {
     length: number;
     thickness: number;
     depth: number;
+    wireframe?: boolean;
 }
 
-const Shelf: FunctionComponent<ShelfProps> = ({ length, thickness, depth, ...meshProps }) =>
+const Shelf: FunctionComponent<ShelfProps> = ({ length, thickness, depth, wireframe, ...meshProps }) =>
     <mesh {...meshProps}>
         <boxGeometry args={[length, thickness, depth]} />
-        <meshBasicMaterial wireframe />
+        <meshBasicMaterial wireframe={wireframe} />
     </mesh>
 
 export default Shelf

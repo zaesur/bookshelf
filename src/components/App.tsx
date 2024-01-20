@@ -10,7 +10,8 @@ const App: FunctionComponent = () => {
     height,
     depth,
     shelves,
-    thickness
+    thickness,
+    wireframe,
   } = useControls({
     width: {
       value: 1.5,
@@ -41,12 +42,21 @@ const App: FunctionComponent = () => {
       step: 0.005,
       min: 0.01,
       max: 0.05,
-    }
+    },
+    wireframe: false,
   })
 
   return (
     <div className={styles.experience}>
-      <Experience><BookShelf width={width} height={height} depth={depth} shelves={shelves} thickness={thickness} /></Experience>
+      <Experience>
+        <BookShelf
+          wireframe={wireframe}
+          width={width}
+          height={height}
+          depth={depth}
+          shelves={shelves}
+          thickness={thickness} />
+      </Experience>
     </div>
   );
 };
