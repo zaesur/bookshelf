@@ -11,21 +11,6 @@ interface ShelfProps extends MeshProps {
 }
 
 const Shelf: FunctionComponent<ShelfProps> = ({ length, thickness, depth, ...meshProps }) => {
-    const { displacement, resolution } = useControls("displacement", {
-        resolution: {
-            value: 50,
-            min: 1,
-            max: 100,
-            step: 1
-        },
-        displacement: {
-            value: 0,
-            min: 0,
-            max: 1,
-            step: 0.01
-        }
-    })
-
     const { wireframe, texture } = useControls("properties", {
         wireframe: false,
         texture: {
@@ -44,8 +29,8 @@ const Shelf: FunctionComponent<ShelfProps> = ({ length, thickness, depth, ...mes
     });
 
     return <mesh {...meshProps}>
-        <boxGeometry args={[length, thickness, depth, length * resolution, thickness * resolution, depth * resolution]} />
-        <meshStandardMaterial {...textures} wireframe={wireframe} displacementScale={displacement} />
+        <boxGeometry args={[length, thickness, depth]} />
+        <meshStandardMaterial {...textures} wireframe={wireframe} />
     </mesh>
 }
 

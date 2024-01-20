@@ -4,6 +4,16 @@ import { button, useControls } from "leva";
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js'
 import { Group } from "three";
 
+const download = (json: Object) => {
+    const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(json))}`
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", "world.gltf");
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+}
+
 interface BookShelfProps {
     width: number
     height: number;
@@ -24,20 +34,9 @@ const BookShelf: FunctionComponent<BookShelfProps> = ({
         download: button(
             () => new GLTFExporter().parse(
                 groupRef.current,
-                (gltf) => {
-                    const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(gltf))}`
-                    const downloadAnchorNode = document.createElement('a');
-                    downloadAnchorNode.setAttribute("href", dataStr);
-                    downloadAnchorNode.setAttribute("download", "world.gltf");
-                    document.body.appendChild(downloadAnchorNode);
-                    downloadAnchorNode.click();
-                    downloadAnchorNode.remove();
-                },
+                (gltf) => download(gltf),
                 (error) => console.warn(error)
             ),
-            {
-
-            }
         )
     })
 
