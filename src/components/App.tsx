@@ -11,7 +11,7 @@ const App: FunctionComponent = () => {
     depth,
     shelves,
     thickness,
-  } = useControls({
+  } = useControls("properties", {
     width: {
       value: 1.5,
       step: 0.1,

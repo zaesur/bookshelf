@@ -1,7 +1,8 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useRef } from "react";
 import Shelf from "./Shelf";
-import { useThree } from "@react-three/fiber";
-import { useControls } from "leva";
+import { button, useControls } from "leva";
+import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js'
+import { Group } from "three";
 
 interface BookShelfProps {
     width: number
@@ -18,7 +19,29 @@ const BookShelf: FunctionComponent<BookShelfProps> = ({
     shelves,
     thickness
 }) => {
-    return <group>
+    const groupRef = useRef<Group>(null!)
+    useControls({
+        download: button(
+            () => new GLTFExporter().parse(
+                groupRef.current,
+                (gltf) => {
+                    const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(gltf))}`
+                    const downloadAnchorNode = document.createElement('a');
+                    downloadAnchorNode.setAttribute("href", dataStr);
+                    downloadAnchorNode.setAttribute("download", "world.gltf");
+                    document.body.appendChild(downloadAnchorNode);
+                    downloadAnchorNode.click();
+                    downloadAnchorNode.remove();
+                },
+                (error) => console.warn(error)
+            ),
+            {
+
+            }
+        )
+    })
+
+    return <group ref={groupRef}>
         {/* Boards */}
         {Array.from(Array(shelves + 2)).map((_, i) =>
             <Shelf
